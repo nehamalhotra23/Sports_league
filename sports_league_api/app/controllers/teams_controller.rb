@@ -1,5 +1,7 @@
 class TeamsController < ApplicationController
    before_action :authenticate_team,except: [:create]
+   
+   
 
   # GET /teams
   def index
@@ -9,9 +11,14 @@ class TeamsController < ApplicationController
   end
 
   # GET /teams/1
-  def show
-    render json: @team
-  end
+#   def show
+#     team = Team.find_by(name: params[:name])
+#     if team.password == params[:password]
+#     render json: {team: team}
+#     else
+#       render json: { message: 'unauthorised' }
+#   end
+# end
 
   # POST /teams
    def create
