@@ -2,6 +2,12 @@
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
 # Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
+ Team.create([{ name: 'star' }, { email: 'star@ymail.com' }, { password: 'star' }, { password_confirmation: 'star' },])
+
+  Team.create([{ name: 'neha' }, { email: 'neha@ymail.com' }, { password: 'neha' }, { password_confirmation: 'neha' },])
+
+  Team.create([{ name: 'tom' }, { email: 'tom@ymail.com' }, { password: 'tom' }, { password_confirmation: 'tom' },])
+
+  Team.create([{ name: 'lisa' }, { email: 'lisa@ymail.com' }, { password: 'lisa' }, { password_confirmation: 'lisa' },])
+
 #   Character.create(name: 'Luke', movie: movies.first)

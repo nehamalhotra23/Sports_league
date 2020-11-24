@@ -36,6 +36,8 @@ fetch('http://localhost:3001/auth/signin', {
       return response.json()
     })
     .then((data) => localStorage.setItem("jwt", data.jwt))
+    .then(data => this.props.setCurrentUser(data))
+    .then(data => this.props.routerProps.history.push('/profile'))
     .catch(error => {console.log(error)});
   }
 
@@ -72,7 +74,7 @@ fetch('http://localhost:3001/auth/signin', {
           value={this.state.password}
           onChange={(event) => this.handleChange(event)}
           />
-        <input type="submit" />
+        <button type="submit"> sign in </button>
       </form>
     </div>
   );

@@ -1,16 +1,34 @@
 class TeamsController < ApplicationController
    before_action :authenticate_team,except: [:create]
    
-   
-
-  # GET /teams
+    # GET /teams
   def index
-    @teams = Team.all
-
-    render json: @teams
+    if current_user
+    render json: {status: 200, msg: 'Logged-in'}
+    else
+      render json: { message: 'team is not logged in' }
+    end
   end
 
-  # GET /teams/1
+  # http://localhost:3001/auth/signin
+  def create
+   @team = Team.new(team_params)
+    if @team.save
+     render json: @team, status: :created
+   else
+     render json: @team.errors, status: :unprocessable_entity
+   end
+ end
+   
+#   def current_user
+#     team = Team.find(params[:id])
+#     if team.password == params[:password]
+#     render json: {team: team}
+#     else
+#     render json: { message: 'No current team exists' }
+# end
+
+#   # GET /teams/1
 #   def show
 #     team = Team.find_by(name: params[:name])
 #     if team.password == params[:password]
@@ -20,38 +38,26 @@ class TeamsController < ApplicationController
 #   end
 # end
 
-  # POST /teams
-   def create
-    @team = Team.new(team_params)
-    if @team.save
-      render json: @team, status: :created, location: @team
-    else
-      render json: @team.errors, status: :unprocessable_entity
-    end
-  end
+#   # PATCH/PUT /teams/1
+#   def update
+#     team = Team.find(params[:id])
+#     if team.update(team_params)
+#       render json: team
+#     else
+#       render json: @team.errors, status: :unprocessable_entity
+#     end
+#   end
 
+#   # DELETE /teams/1
+#   def destroy
+#    team = Team.find(params[:id])
+#     if team.destroy
+#        render json: { status: 200, msg: 'Team has been deleted.' }
+#     else
+#   end
+# end
 
-  # PATCH/PUT /teams/1
-  def update
-    if @team.update(team_params)
-      render json: @team
-    else
-      render json: @team.errors, status: :unprocessable_entity
-    end
-  end
-
-  # DELETE /teams/1
-  def destroy
-    @team.destroy
-  end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_team
-      @team = Team.find(params[:id])
-    end
-
-    # Only allow a trusted parameter "white list" through.
+  # private
     def team_params
      params.permit(:name, :email, :password, :password_confirmation)
     end

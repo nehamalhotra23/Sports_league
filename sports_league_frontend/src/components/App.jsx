@@ -17,14 +17,33 @@ class App extends React.Component {
       CurrentTeam: data.team,
     })
   }
+
+  getTeam() {
+    axios.get('http://localhost:3001/auth/show')
+    .then(response => {
+      this.setState({team: response.data})
+    })
+    .catch(error => console.log(error))
+  }
+
+  componentDidMount() {
+    this.getTeam()
+  }
+
   render() {
   return (
     <div className="container">
      <Switch>
        <Route exact path='/' component={Header} />
-        <Route path='/Signin' render={()=><Signin onTeamSigningIn={this.setCurrentTeam} />} ></Route>
+        <Route path='/Signin' render={(props)=><Signin onTeamSigningIn={this.setCurrentTeam} routerProps={props} />} ></Route>
         <Route exact path='/Signup' component={Signup} /> 
-        <Route exact path='/Profile' component={Profile} />   
+        <Route exact path='/Profile' render={() => {
+          return this.state.CurrentTeam ? (
+           <Profile CurrentTeam={this.state.CurrentTeam} />
+          ) : (
+            <Signin setCurrentTeam={this.setCurrentTeam} />
+          )
+        }} />   
      </Switch>
     </div>
   );
