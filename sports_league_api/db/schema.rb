@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_23_190056) do
+ActiveRecord::Schema.define(version: 2020_11_24_214753) do
+
+  create_table "playerbots", force: :cascade do |t|
+    t.string "name"
+    t.integer "speed"
+    t.integer "strength"
+    t.integer "agility"
+    t.integer "team_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "teams", force: :cascade do |t|
     t.string "name"

@@ -1,11 +1,11 @@
 class TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update, :destroy]
-   before_action :authenticate_team,except: [:create]
+  before_action :authenticate_team,except: [:create]
    
     # GET /teams
   def index
     if current_team
-    render json: {status: 200, msg: 'Logged-in'}
+      render json: {status: 200, msg: 'Logged-in'}
     else
       render json: { message: 'team is not logged in' }
     end
@@ -13,8 +13,8 @@ class TeamsController < ApplicationController
 
   # http://localhost:3001/auth/signin
   def create
-   @team = Team.new(team_params)
-    if @team.save
+     @team = Team.new(team_params)
+   if @team.save
      render json: @team, status: :created
    else
      render json: @team.errors, status: :unprocessable_entity

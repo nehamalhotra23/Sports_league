@@ -3,11 +3,7 @@
 #
 # Examples:
  Team.create([{ name: 'star' }, { email: 'star@ymail.com' }, { password: 'star' }, { password_confirmation: 'star' },])
-
-  Team.create([{ name: 'neha' }, { email: 'neha@ymail.com' }, { password: 'neha' }, { password_confirmation: 'neha' },])
-
-  Team.create([{ name: 'tom' }, { email: 'tom@ymail.com' }, { password: 'tom' }, { password_confirmation: 'tom' },])
-
-  Team.create([{ name: 'lisa' }, { email: 'lisa@ymail.com' }, { password: 'lisa' }, { password_confirmation: 'lisa' },])
+ Team.create([{ name: 'tom' }, { email: 'tom@ymail.com' }, { password: 'tom' }, { password_confirmation: 'tom' },])
+ Team.create([{ name: 'lisa' }, { email: 'lisa@ymail.com' }, { password: 'lisa' }, { password_confirmation: 'lisa' },])
 
 #   Character.create(name: 'Luke', movie: movies.first)
