@@ -36,7 +36,7 @@ fetch('http://localhost:3001/auth/signin', {
       return response.json()
     })
     .then((data) => localStorage.setItem("jwt", data.jwt))
-    .then(data => this.props.setCurrentUser(data))
+    .then(data => this.props.setCurrentTeam(data))
     .then(data => this.props.routerProps.history.push('/profile'))
     .catch(error => {console.log(error)});
   }
