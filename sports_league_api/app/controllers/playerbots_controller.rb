@@ -6,10 +6,10 @@ class PlayerbotsController < ApplicationController
   end
   
   def create
-    @playerbots = params[:speed] + params[:strength] + params[:agility]
-    # @playerbots = Playerbot.calculate(:count, :all )
-    puts(@playerbots, "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
-    if @playerbots < 100
+    # @playerbots = params[:speed] + params[:strength] + params[:agility]
+    # # @playerbots = Playerbot.calculate(:count, :all )
+    # puts(@playerbots, "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
+    # if @playerbots < 100
     @playerbots = Playerbot.create(playerbots_params)
     json_response(@playerbots)
     else 

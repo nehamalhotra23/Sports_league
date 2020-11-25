@@ -5,10 +5,10 @@ class CreatePlayerbots < ActiveRecord::Migration[5.2]
       t.integer :speed
       t.integer :strength
       t.integer :agility
-      t.column(:team_id, :integer)
-
-
+      t.string :designation
+      t.integer :roster_id
       t.timestamps
+
     end
   end
 end
