@@ -1,5 +1,4 @@
 class PlayerbotsController < ApplicationController
-    belongs_to :team
 
   def index
     @playerbots = Playerbot.all
@@ -7,9 +6,16 @@ class PlayerbotsController < ApplicationController
   end
   
   def create
+    @playerbots = params[:speed] + params[:strength] + params[:agility]
+    # @playerbots = Playerbot.calculate(:count, :all )
+    puts(@playerbots, "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
+    if @playerbots < 100
     @playerbots = Playerbot.create(playerbots_params)
     json_response(@playerbots)
-  end
+    else 
+    end
+   
+    end
 
   private
   def json_response(object, status = :ok)

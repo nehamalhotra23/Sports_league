@@ -8,5 +8,7 @@ Rails.application.routes.draw do
   get  '/teams/:id', to: 'teams#show'
   put  '/teams/:id', to: 'teams#update'
   delete  '/teams/:id', to: 'teams#delete'
+  post '/playerbots', to: 'playerbots#create'
+
 end
 end
