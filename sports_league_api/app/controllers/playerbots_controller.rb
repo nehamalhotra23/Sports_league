@@ -12,10 +12,16 @@ class PlayerbotsController < ApplicationController
     # if @playerbots < 100
     @playerbots = Playerbot.create(playerbots_params)
     json_response(@playerbots)
-    else 
-    end
+    # else 
+    # end
    
     end
+
+    def show
+    @playerbots = Playerbot.find(params[:id])
+    json_response(@playerbots)
+  end
+
 
   private
   def json_response(object, status = :ok)
@@ -23,6 +29,6 @@ class PlayerbotsController < ApplicationController
   end
 
   def playerbots_params
-    params.permit(:name, :speed, :strength, :agility)
+    params.permit(:name, :speed, :strength, :agility, :designation)
   end
 end

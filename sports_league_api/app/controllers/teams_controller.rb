@@ -5,7 +5,9 @@ class TeamsController < ApplicationController
     # GET /teams
   def index
     if current_team
-      render json: {status: 200, msg: 'Logged-in'}
+      @teams = Team.all
+      render :index
+      # json: {status: 200, msg: 'Logged-in'}
     else
       render json: { message: 'team is not logged in' }
     end
@@ -16,6 +18,7 @@ class TeamsController < ApplicationController
      @team = Team.new(team_params)
    if @team.save
      render json: @team, status: :created
+    #  redirect_to '/teams/{:id)' 
    else
      render json: @team.errors, status: :unprocessable_entity
    end
@@ -23,7 +26,8 @@ class TeamsController < ApplicationController
  
  # GET /teams/1
   def show
-    @team = Team.find(params[:id])
+    @team = Team.find_by(params[:name])
+    # @team = @team.find_by :id=>team_id
     render json: @team, status: :created
 end
    
@@ -38,19 +42,19 @@ end
   end
 
 #   # DELETE /teams/1
-  def destroy
-   team = Team.find(params[:id])
-    if team.destroy
-       render json: { status: 200, msg: 'Team has been deleted.' }
-    else
-  end
-end
-
+#   def destroy
+#    team = Team.find(params[:id])
+#     if team.destroy
+#        render json: { status: 200, msg: 'Team has been deleted.' }
+#     else
+#   end
+# end
   private
 
     # Use callbacks to share common setup or constraints between actions.
     def set_team
-      @team = Team.find(params[:id])
+      @team = Team.find_by(params[:name])
+      # team = team.find_by :id=>team_id
     end
 
     def team_params

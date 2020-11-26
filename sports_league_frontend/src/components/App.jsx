@@ -1,53 +1,45 @@
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import React, { Component } from 'react';
 import Header from './Header';
 import Signin from './Signin';
-import Signup from './Signup';
-import Profile from './Profile';
+import Signout from './Signout';
+import TeamInfo from './TeamInfo';
 
-class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      CurrentTeam: null,
-    }
-  }
-  setCurrentTeam(data) {
-    this.setState({
-      CurrentTeam: data.team,
-    })
-  }
+import {BrowserRouter as Router, Route, NavLink, Switch} from 'react-router-dom'
 
-  getTeam() {
-    axios.get('http://localhost:3001/auth/show')
-    .then(response => {
-      this.setState({team: response.data})
-    })
-    .catch(error => console.log(error))
-  }
-
-  componentDidMount() {
-    this.getTeam()
-  }
-
+class App extends Component {
   render() {
-  return (
-    <div className="container">
-     <Switch>
-       <Route exact path='/' component={Header} />
-        <Route path='/Signin' render={(props)=><Signin onTeamSigningIn={this.setCurrentTeam} routerProps={props} />} ></Route>
-        <Route exact path='/Signup' component={Signup} /> 
-        <Route exact path='/Profile' render={() => {
-          return this.state.CurrentTeam ? (
-           <Profile CurrentTeam={this.state.CurrentTeam} />
-          ) : (
-            <Signin setCurrentTeam={this.setCurrentTeam} />
-          )
-        }} />   
-     </Switch>
-    </div>
-  );
+    return (
+      <Router>
+        <div className="container">
+          <Navigation />
+          <Main />
+        </div>
+      </Router>
+    );
+  }
 }
-}
+const Navigation = () => (
+  <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <ul className="navbar-nav mr-auto">
+      <li className="nav-item"><NavLink exact className="nav-link" activeClassName="active" to="/">Home</NavLink></li>
+      <li className="nav-item"><NavLink exact className="nav-link" activeClassName="active" to="/teams">TeamInfo</NavLink></li>
+      
+      {
+        localStorage.getItem("jwt") ?
+          <li className="nav-item"><NavLink exact className="nav-link" to="/signout">Sign Out</NavLink></li>
+        :
+          <li className="nav-item"><NavLink exact className="nav-link" activeClassName="active" to="/signin">Sign In</NavLink></li>
+      }
+    </ul>
+  </nav>
+);
+const Main = () => (
+  <Switch>
+    <Route exact path="/" component={Header} />
+    <Route exact path="/signin" component={Signin} />
+    <Route exact path="/signout" component={Signout} />
+    <Route exact path="/teams/" component={TeamInfo} />
+  </Switch>
+);
 
 export default App;

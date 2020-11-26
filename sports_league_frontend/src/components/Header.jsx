@@ -2,12 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 
 
-function Header() {
+const Header = () => {
         return (
-        <div>
-         <Link to='Signin' className="btn button-primary">SignIn</Link>
-          <Link to='Signup'  className="btn  six columns" disabled>SignUp</Link>
-        </div>
+    <div className="jumbotron">
+      <h1>Home Page</h1>
+    </div>
         );
     }
 

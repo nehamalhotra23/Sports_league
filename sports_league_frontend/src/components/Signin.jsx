@@ -1,85 +1,47 @@
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import React, { Component } from 'react'
+import { post } from 'axios';
 
-class Signin extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: "",
-      email: "",
-      password: ""
-    }
-  }
-  handleChange(event){
-    this.setState({
-      [event.target.id]: event.target.value
-    })
-  }
-handleOnSubmit(event){
-    event.preventDefault()
-    let team = {"auth": 
-    {name: this.state.name, 
-     email: this.state.email, 
-     password: this.state.password}}
-fetch('http://localhost:3001/auth/signin', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify(team)
-    })
-    .then(function(response){
-      if (!response.ok) {
-        throw Error(response.statusText);
-      }
-      return response.json()
-    })
-    .then((data) => localStorage.setItem("jwt", data.jwt))
-    .then(data => this.props.setCurrentTeam(data))
-    .then(data => this.props.routerProps.history.push('/profile'))
-    .catch(error => {console.log(error)});
+class Signin extends Component {
+  constructor() {
+      super();
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  // saved for logout
-  // getResource(){
-  //   let token = "Bearer " + localStorage.getItem("jwt")
-  //   fetch('/api/resource', {
-  //     method: 'GET',
-  //     headers: {
-  //       'Authorization': token
-  //     }
-  //   })
-  //   .then((response) => response.json())
-  //   .then((json) => doSomething(json))
-  // }
+  handleSubmit (event) {
+    event.preventDefault();
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const request = {"auth": {"name": name, "email": email, "password": password}};
+    localStorage.setItem("name", name);
+    post('http://localhost:3001/auth/signin', request)
+      .then(response => {
+        localStorage.setItem("jwt", response.data.jwt);
+        this.props.history.push("/");
+      })
+      .catch(error => console.log('error', error));
+  }  
+
   render() {
-  return (
-    <div className="container">
-     <form className="form" onSubmit={(event) => this.handleOnSubmit(event)}>
-         <input
-          name="name" id="name" type="name"
-          value={this.state.name}
-          onChange={(event) => this.handleChange(event)}
-        />  
-        <label htmlFor="email">Email: </label>
-        <input
-          name="email" id="email" type="email"
-          value={this.state.email}
-          onChange={(event) => this.handleChange(event)}
-        />
-        <label htmlFor="password">Password: </label>
-        <input
-          name="password" id="password" type="password"
-          value={this.state.password}
-          onChange={(event) => this.handleChange(event)}
-          />
-        <button type="submit"> sign in </button>
-      </form>
-    </div>
-  );
+    return (
+      <div>
+        <h1>Log In</h1>
+        <form onSubmit={this.handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="name">Name: </label>
+            <input name="name" id="name" type="name" className="form-control" />
+            <label htmlFor="email">Email: </label>
+            <input name="email" id="email" type="email" className="form-control" />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">Password:</label>
+            <input name="password" id="password" type="password" className="form-control" />
+          </div>
+          <button type="submit" className="btn btn-dark">Submit</button>
+        </form>
+      </div>
+    )
+  }
 }
-}
-
 
 export default Signin;

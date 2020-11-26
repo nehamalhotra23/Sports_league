@@ -30,7 +30,7 @@ class RostersController < ApplicationController
     render json: object, status: status
   end
 
-#   def roster_params
-#     params.permit(:author, :content)
-#   end
+  def roster_params
+    params.permit(:team_id)
+  end
 end

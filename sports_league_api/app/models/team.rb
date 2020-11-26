@@ -4,4 +4,5 @@ class Team < ApplicationRecord
    validates :email, presence: true, uniqueness: true
    has_one :roster
    has_many :playerbots, through: :rosters 
+
   end
