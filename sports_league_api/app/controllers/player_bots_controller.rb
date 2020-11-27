@@ -1,8 +1,8 @@
-class PlayerbotsController < ApplicationController
+class PlayerBotsController < ApplicationController
 
   def index
-    @playerbots = Playerbot.all
-    json_response(@playerbots)
+    @player_bots = PlayerBot.all
+    json_response(@player_bots)
   end
   
   def create
@@ -10,25 +10,27 @@ class PlayerbotsController < ApplicationController
     # # @playerbots = Playerbot.calculate(:count, :all )
     # puts(@playerbots, "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
     # if @playerbots < 100
-    @playerbots = Playerbot.create(playerbots_params)
-    json_response(@playerbots)
+    @player_bot = PlayerBot.create(player_bot_params)
+    json_response(@player_bot)
     # else 
     # end
    
-    end
+  end
 
-    def show
-    @playerbots = Playerbot.find(params[:id])
-    json_response(@playerbots)
+  def show
+    @player_bot = PlayerBot.find(params[:id])
+    json_response(@player_bot)
   end
 
 
   private
+
   def json_response(object, status = :ok)
     render json: object, status: status
   end
 
-  def playerbots_params
+  def player_bot_params
     params.permit(:name, :speed, :strength, :agility, :designation)
+    #params.require(:player_bot).permit(:name, :speed, :strength, :agility, :designation)
   end
 end

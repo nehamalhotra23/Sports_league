@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { post } from 'axios';
 
-class Signin extends Component {
+class Signup extends Component {
   constructor() {
       super();
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -12,11 +12,11 @@ class Signin extends Component {
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
-    const request = {"auth": {"name": name, "email": email, "password": password}};
-    localStorage.setItem("name", name);
-    post('http://localhost:3001/auth/signin', request)
+     const password_confirmation = document.getElementById('password_confirmation').value;
+    const request = {"name": name, "email": email, "password": password, "password_confirmation": password_confirmation};
+    // localStorage.setItem("name", name);
+    post('http://localhost:3001/auth/signup', request)
       .then(response => {
-        localStorage.setItem("jwt", response.data.jwt);
         this.props.history.push("/");
       })
       .catch(error => console.log('error', error));
@@ -25,7 +25,7 @@ class Signin extends Component {
   render() {
     return (
       <div>
-        <h1>Log In</h1>
+        <h1>Sign up</h1>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label htmlFor="name">Name: </label>
@@ -36,6 +36,8 @@ class Signin extends Component {
           <div className="form-group">
             <label htmlFor="password">Password:</label>
             <input name="password" id="password" type="password" className="form-control" />
+             <label htmlFor="password_confirmation">Password confirmation:</label>
+            <input name="password_confirmation" id="password_confirmation" type="password_confirmation" className="form-control" />
           </div>
           <button type="submit" className="btn btn-dark">Submit</button>
         </form>
@@ -44,4 +46,4 @@ class Signin extends Component {
   }
 }
 
-export default Signin;
+export default Signup;
