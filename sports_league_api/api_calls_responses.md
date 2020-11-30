@@ -1,15 +1,15 @@
 <!-- post: http://localhost:3001/auth/signin
 
-body:
+raw-JSON body:
 
 {
 "auth":
-{
+  {
 "name": "Team1",
 "email": "team1@ymail.com",
-"password": "team1"
+"password": "team1@ymail.com"
 
-    }
+  }
 
 }
 
@@ -37,8 +37,8 @@ body: Raw: Json
 {
 "name": "Team 1",
 "email": "team1@ymail.com",
-"password": "team0",
-"password_confirmation": "team0"
+"password": "team1@ymail.com",
+"password_confirmation": "team1@ymail.com"
 } -->
 
 <!-- 4. DELETE: http://localhost:3001/teams/1
@@ -51,7 +51,7 @@ body: Raw: Json
 {
 "name": "Team1",
 "email": "team1@ymail.com",
-"password": "team1"
+"password": "team1@ymail.com"
 
     }
 
@@ -63,15 +63,17 @@ Response:
 "msg": "Team has been deleted."
 } -->
 
-<!-- 4. post: http://localhost:3001/auth/signup
+<!-- 5. post: http://localhost:3001/auth/signup
+new team has to be unique
 
 body
 {
-"name": "Team1",
-"email": "team1@ymail.com",
-"password": "team1"
+"name": "TeamNew",
+"email": "teamNew@ymail.com",
+"password": "teamNew@ymail.com"
+"password_confirmation": "teamNew@ymail.com"
 
-    }
+}
 
 response: 201 created
 
@@ -84,9 +86,32 @@ response: 201 created
 "updated_at": "2020-11-25T21:15:51.410Z"
 } -->
 
-<!-- 5. GET http://localhost:3001/rosters/1
-   response body:
-   {
-   "id": 1,
-   "team_id": 1
-   } -->
+<!-- 6. list of player_bots for particular team/ make sure authorisation toke is present
+get: http://localhost:3001/teams/:id/player_bots   -->
+
+<!-- responseBody: 200k
+
+[
+    {
+        "id": 1,
+        "name": "playerbot 0",
+        "speed": 30,
+        "strength": 20,
+        "agility": 10,
+        "designation": "starter",
+        "team_id": 1,
+        "created_at": "2020-11-30T19:49:35.237Z",
+        "updated_at": "2020-11-30T19:49:35.237Z"
+    },
+    {
+        "id": 2,
+        "name": "playerbot 1",
+        "speed": 30,
+        "strength": 20,
+        "agility": 10,
+        "designation": "starter",
+        "team_id": 1,
+        "created_at": "2020-11-30T19:49:35.245Z",
+        "updated_at": "2020-11-30T19:49:35.245Z"
+    },
+] -->

@@ -26,7 +26,7 @@ export default function Navigation({}) {
             exact
             className="nav-link"
             activeClassName="active"
-            to="/teams"
+            to="/team"
           >
             TeamInfo
           </NavLink>

@@ -1,24 +1,40 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# _Sports League_
 
-Things you may want to cover:
+#### By _**Neha Malhotra**_
 
-* Ruby version
+## Description
 
-* System dependencies
+_In this application team can sign up for new account and create playerbots. _
 
-* Configuration
+## Setup/Installation Requirements
 
-* Database creation
+- _Clone this repository https://github.com/nehamalhotra23/sports_league.git_
+- _Go to sports_league_frontend directory and run "npm i" && "npm run start"_
+- \_In sports_league_api directory run below steps in order
+  1. rails db:create
+  2. rails db:migrate
+  3. rails db:seed and navigate to http://localhost:3000\_
 
-* Database initialization
+## Known Bugs
 
-* How to run the test suite
+_There are no known bugs._
 
-* Services (job queues, cache servers, search engines, etc.)
+## Support and contact details
 
-* Deployment instructions
+_Contact Neha at nehamalhotra8999@gmail.com_
 
-* ...
+## Technologies Used
+
+_Ruby on Rails, Knock token based Authentication, React and Npm Packages_
+
+### License
+
+Copyright (c) 2019 **Neha Malhotra**
+
+- Services (job queues, cache servers, search engines, etc.)
+
+- Deployment instructions
+
+- ...
