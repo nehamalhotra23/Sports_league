@@ -6,13 +6,13 @@
 
 ## Description
 
-_In this application team can sign up for new account and create playerbots. _
+_In this application a team can sign up for a new account and create a team roster from a set of playerbots. _
 
 ## Setup/Installation Requirements
 
 - _Clone this repository https://github.com/nehamalhotra23/sports_league.git_
-- _Go to sports_league_frontend directory and run "npm i" && "npm run start"_
-- \_In sports_league_api directory run below steps in order
+- _Go to sports_league_frontend directory and run "npm i" && "npm run start"
+- In sports_league_api directory run below commands in order
   1. rails db:create
   2. rails db:migrate
   3. rails db:seed and navigate to http://localhost:3000\_
@@ -31,10 +31,4 @@ _Ruby on Rails, Knock token based Authentication, React and Npm Packages_
 
 ### License
 
-Copyright (c) 2019 **Neha Malhotra**
-
-- Services (job queues, cache servers, search engines, etc.)
-
-- Deployment instructions
-
-- ...
+Copyright (c) 2020 **Neha Malhotra**
